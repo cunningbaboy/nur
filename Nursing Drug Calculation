@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing Student Drug Calculations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Nursing Student Drug Calculations</h1>
+    </header>
+    <main>
+        <p>This website provides 100 scenario-based questions to help nursing students practice drug calculations. Click the button below to start the quiz.</p>
+        <a href="scenarios.html" class="button">Start Quiz</a>
+    </main>
+</body>
+</html>
+
