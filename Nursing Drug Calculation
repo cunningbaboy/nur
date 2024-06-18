@@ -15,5 +15,150 @@
         <a href="scenarios.html" class="button">Start Quiz</a>
     </main>
 </body>
+</html>        
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Calculation Scenarios</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Drug Calculation Scenarios</h1>
+    </header>
+    <main>
+        <form id="quiz-form">
+            <div id="questions-container">
+                <!-- Questions will be loaded here dynamically -->
+            </div>
+            <button type="submit" class="button">Submit Answers</button>
+        </form>
+    </main>
+</body>
 </html>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Your Results</h1>
+    </header>
+    <main>
+        <div id="results-container">
+            <!-- Results will be displayed here -->
+        </div>
+        <a href="scenarios.html" class="button">Try Again</a>
+    </main>
+</body>
+</html>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+main {
+    padding: 2em;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 1em 2em;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1em;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const questions = [
+        // Array of questions
+        {
+            question: "What is the correct dosage of Drug X for a 70kg patient if the dosage is 5mg/kg?",
+            choices: ["350mg", "400mg", "450mg", "500mg"],
+            correct: "350mg"
+        },
+        // Add more questions up to 100 here...
+    ];
+
+    const questionsContainer = document.getElementById('questions-container');
+    const quizForm = document.getElementById('quiz-form');
+
+    questions.forEach((q, index) => {
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('question');
+        
+        const questionText = document.createElement('p');
+        questionText.innerText = `${index + 1}. ${q.question}`;
+        questionElement.appendChild(questionText);
+        
+        q.choices.forEach(choice => {
+            const choiceLabel = document.createElement('label');
+            choiceLabel.innerText = choice;
+            
+            const choiceInput = document.createElement('input');
+            choiceInput.type = 'radio';
+            choiceInput.name = `question${index}`;
+            choiceInput.value = choice;
+            
+            choiceLabel.prepend(choiceInput);
+            questionElement.appendChild(choiceLabel);
+        });
+        
+        questionsContainer.appendChild(questionElement);
+    });
+
+    quizForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let correctCount = 0;
+        questions.forEach((q, index) => {
+            const userAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+            if (userAnswer && userAnswer.value === q.correct) {
+                correctCount++;
+            }
+        });
+
+        localStorage.setItem('quizResults', `You got ${correctCount} out of ${questions.length} correct!`);
+        window.location.href = 'results.html';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const resultsContainer = document.getElementById('results-container');
+    if (resultsContainer) {
+        resultsContainer.innerText = localStorage.getItem('quizResults');
+    }
+});
+
+{
+    question: "Your question here?",
+    choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+    correct: "Correct answer"
+}
